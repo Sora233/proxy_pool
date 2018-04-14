@@ -12,20 +12,19 @@
 """
 __author__ = 'JHao'
 
-import sys
+import sys, os
 from multiprocessing import Process
 
-sys.path.append('../')
 
-from Api.ProxyApi import run as ProxyApiRun
+# parent dir
+sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), os.path.pardir))
+
 from Schedule.ProxyValidSchedule import run as ValidRun
 from Schedule.ProxyRefreshSchedule import run as RefreshRun
 
 
 def run():
     p_list = list()
-    p1 = Process(target=ProxyApiRun, name='ProxyApiRun')
-    p_list.append(p1)
     p2 = Process(target=ValidRun, name='ValidRun')
     p_list.append(p2)
     p3 = Process(target=RefreshRun, name='RefreshRun')
